@@ -1,0 +1,43 @@
+baseURL = 'https://primeclover-inbox.com/'
+languageCode = 'ja'
+title = '193'
+hasCJKLanguage = true
+
+[params]
+  author = "193"
+  description = "イラスト・ゲーム配信・技術記事など、193の活動をまとめたサイト"
+  twitter = "_ikumin3"
+  pixiv = "20307921"
+  twitch = "ikumin3"
+  youtube = "UCUnUn31hUrjXkR-tGIlm0zA"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Gallery"
+    url = "/gallery/"
+    weight = 2
+  [[menu.main]]
+    name = "Commission"
+    url = "/commission/"
+    weight = 3
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 4
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 5
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

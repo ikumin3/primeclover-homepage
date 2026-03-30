@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  <!-- Animated scrolling text -->
+  <div class="animated-text" aria-hidden="true">primeclover</div>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="site-nav">
+        {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}" class="{{ if $.IsMenuCurrent "main" . }}active{{ end }}">{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ now.Year }} {{ .Site.Params.author }}. All Rights Reserved.</p>
+      <div class="footer-social">
+        <span>FOLLOW ME</span>
+        {{ with .Site.Params.pixiv }}
+        <a href="https://www.pixiv.net/users/{{ . }}" target="_blank" aria-label="Pixiv">
+          <svg viewBox="0 0 24 24"><path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697-2.314 0-4.46-.842-4.46-.842v2.718c.397.116 1.048.365.635.779H5.79c-.41-.41.19-.663.635-.779V7.666c-.442-.116-1.045-.368-.635-.779h4.21c.41.41-.193.663-.635.779v.77s1.484-.79 4.38-.89zm-.086 1.71c-1.71.017-3.29.49-3.29.49v7.404s1.263.658 3.218.658c1.09 0 2.078-.282 2.837-.895a3.593 3.593 0 0 0 1.217-2.725 3.788 3.788 0 0 0-1.17-2.824c-.761-.72-1.793-1.108-2.812-1.108z"/></svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.twitter }}
+        <a href="https://twitter.com/{{ . }}" target="_blank" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

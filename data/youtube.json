@@ -1,0 +1,30 @@
+{
+  "channel": {
+    "id": "UCUnUn31hUrjXkR-tGIlm0zA",
+    "title": "ikumi",
+    "description": "お絵かきとかゲーム配信したり、後はなんか旅行したりしたら載せたい\n",
+    "thumbnail": "https://yt3.ggpht.com/4UpggRay53T-pL7wlZoAxljSHojjBxBRz5J_CSCshaBjL9jOeMuTPv8877bGtnqlyvhBShZx=s800-c-k-c0x00ffffff-no-rj",
+    "url": "https://www.youtube.com/channel/UCUnUn31hUrjXkR-tGIlm0zA",
+    "subscriber_count": "1",
+    "video_count": "2"
+  },
+  "videos": [
+    {
+      "id": "m4KucX-yR74",
+      "title": "マヤノトップガンちゃん目パチアニメ #shorts",
+      "description": "昔LIVE2Dの勉強として作成したマヤノトップガンちゃんの目パチアニメーションです。",
+      "url": "https://www.youtube.com/watch?v=m4KucX-yR74",
+      "thumbnail": "https://i.ytimg.com/vi/m4KucX-yR74/hqdefault.jpg",
+      "published_at": "2023-01-16T20:12:45Z"
+    },
+    {
+      "id": "lwVQ50rpA4Q",
+      "title": "Rewriteの制服レースブラシデモ",
+      "description": "BOOTH無料配布用のデモ動画",
+      "url": "https://www.youtube.com/watch?v=lwVQ50rpA4Q",
+      "thumbnail": "https://i.ytimg.com/vi/lwVQ50rpA4Q/hqdefault.jpg",
+      "published_at": "2022-02-11T18:30:57Z"
+    }
+  ],
+  "updated_at": "2026-03-29T18:31:06.106651Z"
+}

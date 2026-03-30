@@ -1,0 +1,116 @@
+{{ define "main" }}
+<div class="container">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  <div class="gallery-grid">
+    {{/* mdファイルがある作品（詳細付き） */}}
+    {{ range .Pages.ByDate.Reverse }}
+      {{ $image := .Resources.GetMatch "*.{jpg,jpeg,png,webp,gif,svg}" }}
+      <div class="gallery-item"
+           data-title="{{ .Title }}"
+           data-image="{{ with $image }}{{ .RelPermalink }}{{ end }}"
+           data-content="{{ .Content | htmlEscape }}"
+           data-date="{{ .Date.Format "2006-01-02" }}"
+           data-tags="{{ delimit .Params.tags ", " }}">
+        {{ with $image }}
+          <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        {{ end }}
+        <div class="gallery-overlay">
+          <span class="gallery-title">{{ .Title }}</span>
+          <span class="gallery-type">{{ with .Params.type }}{{ . }}{{ else }}Illustration{{ end }}</span>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* 画像のみ（mdなし） */}}
+    {{ $standalone := .Resources.Match "*.{jpg,jpeg,png,webp,gif,svg}" }}
+    {{ range $standalone }}
+      {{ $name := .Name | replaceRE "\\.[^.]+$" "" }}
+      <div class="gallery-item"
+           data-title="{{ $name }}"
+           data-image="{{ .RelPermalink }}"
+           data-content=""
+           data-date=""
+           data-tags="">
+        <img src="{{ .RelPermalink }}" alt="{{ $name }}" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-title">{{ $name }}</span>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <div class="lightbox-content">
+    <div class="lightbox-image">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-info">
+      <h2 id="lightbox-title"></h2>
+      <div id="lightbox-meta" class="lightbox-meta"></div>
+      <div id="lightbox-body" class="lightbox-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxMeta = document.getElementById('lightbox-meta');
+  const lightboxBody = document.getElementById('lightbox-body');
+  const closeBtn = document.querySelector('.lightbox-close');
+
+  // Gallery item click
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', function() {
+      const title = this.dataset.title;
+      const image = this.dataset.image;
+      const content = this.dataset.content;
+      const date = this.dataset.date;
+      const tags = this.dataset.tags;
+
+      lightboxImg.src = image;
+      lightboxTitle.textContent = title;
+
+      // Meta info
+      let meta = '';
+      if (date) meta += '<time>' + date + '</time>';
+      if (tags) meta += '<span class="tags">' + tags + '</span>';
+      lightboxMeta.innerHTML = meta;
+
+      // Content (HTML decoded)
+      if (content) {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = content;
+        lightboxBody.innerHTML = txt.value;
+      } else {
+        lightboxBody.innerHTML = '';
+      }
+
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+{{ end }}

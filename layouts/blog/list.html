@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="container">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  <div class="blog-grid">
+    {{ range .Pages.ByDate.Reverse }}
+      {{ $thumbnail := .Resources.GetMatch "thumbnail.*" }}
+      {{ if not $thumbnail }}
+        {{ $thumbnail = .Resources.GetMatch "*.{jpg,jpeg,png,webp,gif}" }}
+      {{ end }}
+      <a href="{{ .Permalink }}" class="blog-card">
+        <div class="blog-thumbnail">
+          {{ with $thumbnail }}
+            <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+          {{ else }}
+            <div class="blog-placeholder">
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+              </svg>
+            </div>
+          {{ end }}
+        </div>
+        <div class="blog-info">
+          <h3>{{ .Title }}</h3>
+          <div class="blog-meta">
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.categories }}
+              <span class="blog-category">{{ index . 0 }}</span>
+            {{ end }}
+          </div>
+          {{ with .Summary }}
+            <p class="blog-summary">{{ . | truncate 80 }}</p>
+          {{ end }}
+        </div>
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

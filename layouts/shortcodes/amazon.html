@@ -1,0 +1,27 @@
+{{ $asin := .Get "asin" }}
+{{ $affiliateTag := .Get "tag" }}
+<div class="amazon-card">
+    <a href="https://www.amazon.co.jp/dp/{{ $asin }}/?tag={{ $affiliateTag }}" target="_blank" rel="nofollow noopener">
+        <img src="https://images-na.ssl-images-amazon.com/images/P/{{ $asin }}.jpg" alt="Amazon Product Image">
+        <div class="amazon-card-content">
+            <h4>Amazon商品タイトル</h4>
+            <p>商品説明など</p>
+        </div>
+    </a>
+</div>
+<style>
+    .amazon-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+    .amazon-card img {
+        max-width: 100px;
+        margin-right: 10px;
+    }
+    .amazon-card-content {
+        flex: 1;
+    }
+</style>
